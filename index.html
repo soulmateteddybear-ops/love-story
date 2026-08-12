@@ -7,170 +7,397 @@
     <title>Our Love Story ❤️</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            background: #fff0f5;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff0f5, #ffe4ec);
             font-family: Georgia, serif;
-            text-align: center;
             color: #5a1745;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .story {
-            padding: 40px 20px;
+        .storybook {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 100vh;
+            padding: 25px 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        h1 {
+        /* TITLE */
+
+        .title {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .title h1 {
+            margin: 0;
             font-size: 42px;
-            margin-bottom: 10px;
         }
 
-        .date {
-            font-size: 22px;
-            margin-bottom: 30px;
+        .title p {
+            margin: 8px 0;
+            font-size: 20px;
         }
+
+        /* SCENE */
 
         .scene {
-            margin: 60px auto;
-            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+
+            animation: fadeIn 0.7s ease;
         }
 
-        img {
-            width: 90%;
-            max-width: 900px;
+        .scene img {
+            width: 100%;
+            max-width: 950px;
+            max-height: 68vh;
+
+            object-fit: contain;
+
             border-radius: 20px;
-            margin: 25px auto;
-            display: block;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25);
+
+            background: white;
         }
 
-        h2 {
+        .scene h2 {
             font-size: 30px;
+            margin: 18px 10px 8px;
+        }
+
+        .scene p {
+            font-size: 19px;
+            line-height: 1.5;
+            margin: 8px auto;
+            max-width: 800px;
+        }
+
+        /* CONTROLS */
+
+        .controls {
+            width: 100%;
+            max-width: 950px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
             margin-top: 20px;
         }
 
-        p {
+        button {
+            border: none;
+            background: #f58b9b;
+            color: white;
+
+            font-family: Georgia, serif;
+            font-size: 17px;
+
+            padding: 12px 24px;
+            border-radius: 30px;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #df6f84;
+            transform: scale(1.06);
+        }
+
+        button:disabled {
+            background: #d9b8c0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .page-number {
+            font-size: 17px;
+            color: #8b5265;
+        }
+
+        /* HEARTS */
+
+        .hearts {
             font-size: 20px;
-            line-height: 1.7;
+            margin-top: 12px;
+            letter-spacing: 5px;
         }
 
-        .divider {
-            font-size: 28px;
-            margin: 50px auto;
-            color: #e58ca0;
+        /* ANIMATION */
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .ending {
-            font-size: 26px;
-            margin-top: 60px;
-            margin-bottom: 30px;
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .storybook {
+                padding: 15px 10px;
+            }
+
+            .title h1 {
+                font-size: 30px;
+            }
+
+            .title p {
+                font-size: 17px;
+            }
+
+            .scene img {
+                max-height: 55vh;
+                border-radius: 12px;
+            }
+
+            .scene h2 {
+                font-size: 23px;
+            }
+
+            .scene p {
+                font-size: 16px;
+            }
+
+            button {
+                padding: 10px 17px;
+                font-size: 15px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="story">
+    <div class="storybook">
 
-        <h1>Our Love Story ❤️</h1>
+        <!-- TITLE -->
 
-        <div class="date">
-            August 19, 2023
+        <div class="title">
+            <h1>Our Love Story ❤️</h1>
+            <p>August 19, 2023 ✨</p>
         </div>
 
 
-        <!-- ========================= -->
-        <!-- SCENE 1 - FIRST MEETING -->
-        <!-- ========================= -->
+        <!-- STORY SCENE -->
 
         <div class="scene">
 
-            <img
-                src="first-meeting.png.png"
-                alt="Sathya and Kishore's first meeting"
-            >
+            <img id="sceneImage" src="" alt="Our love story">
 
-            <h2>The day our story began... 💕</h2>
+            <h2 id="sceneTitle"></h2>
 
-            <p>
-                A simple “Hi” that changed everything. ❤️
-            </p>
+            <p id="sceneText"></p>
 
         </div>
 
 
-        <div class="divider">
-            ❤️ ❤️ ❤️
-        </div>
+        <!-- NAVIGATION -->
 
+        <div class="controls">
 
-        <!-- ========================= -->
-        <!-- SCENE 2 - FATHERS AGREE -->
-        <!-- ========================= -->
+            <button id="backButton" onclick="previousScene()">
+                ← Back
+            </button>
 
-        <div class="scene">
+            <div class="page-number">
+                <span id="pageNumber">1 / 4</span>
+            </div>
 
-            <img
-                src="Agreed.png.png"
-                alt="Both fathers agreeing to the marriage"
-            >
-
-            <h2>And then... our families said YES ❤️</h2>
-
-            <p>
-                A beautiful phone call between two fathers...
-            </p>
-
-            <p>
-                With love and happiness, both families agreed
-                to bring Sathya and Kishore together. 💍❤️
-            </p>
+            <button id="nextButton" onclick="nextScene()">
+                Next ❤️ →
+            </button>
 
         </div>
 
-
-        <div class="divider">
-            ❤️ ❤️ ❤️
-        </div>
-
-
-        <!-- ========================= -->
-        <!-- SCENE 3 - FAMILY MEETING -->
-        <!-- ========================= -->
-
-        <div class="scene">
-
-            <img
-                src="FamilyMeeting.png.png"
-                alt="Sathya and Kishore's families meeting"
-            >
-
-            <h2>Two Families, One Beautiful Journey ❤️</h2>
-
-            <p>
-                Sathya's family went to Kishore's home
-                to meet his family. 🏡💕
-            </p>
-
-            <p>
-                With parents, sisters, aunts and uncles
-                gathered together, two families came closer
-                and shared a beautiful moment. 👨‍👩‍👧‍👦❤️
-            </p>
-
-            <p>
-                And in the middle of it all was Kishore...
-                in a new look, but with the same smile
-                that had already become special. 😊❤️
-            </p>
-
-        </div>
-
-
-        <div class="ending">
-            ✨ And our beautiful journey continued... ✨
+        <div class="hearts">
+            ❤️ ✨ ❤️ ✨ ❤️
         </div>
 
     </div>
+
+
+    <script>
+
+        /* ============================
+           OUR STORY SCENES
+        ============================ */
+
+        const scenes = [
+
+            {
+                image: "first-meeting.png.png",
+
+                title: "The day our story began... 💕",
+
+                text:
+                    "A simple “Hi” that changed everything. ❤️"
+            },
+
+
+            {
+                image: "Agreed.png.png",
+
+                title: "And then... our families said YES ❤️",
+
+                text:
+                    "A beautiful phone call between two fathers... " +
+                    "and with love and happiness, both families agreed " +
+                    "to bring Sathya and Kishore together. 💍❤️"
+            },
+
+
+            {
+                image: "FamilyMeeting.png.png",
+
+                title: "Two Families, One Beautiful Journey ❤️",
+
+                text:
+                    "Sathya's family went to Kishore's home to meet his family. " +
+                    "Parents, sisters, aunts and uncles gathered together, " +
+                    "bringing two families closer. 🏡👨‍👩‍👧‍👦💕"
+            },
+
+
+            {
+                image: "FirstChat.png.png",
+
+                title: "Our First WhatsApp Chat 📱❤️",
+
+                text:
+                    "September 2023 — a simple “Hi” became the beginning " +
+                    "of our beautiful conversations. 💕"
+            }
+
+        ];
+
+
+        /* ============================
+           CURRENT SCENE
+        ============================ */
+
+        let currentScene = 0;
+
+
+        /* ============================
+           SHOW SCENE
+        ============================ */
+
+        function showScene() {
+
+            const scene = scenes[currentScene];
+
+            const image = document.getElementById("sceneImage");
+            const title = document.getElementById("sceneTitle");
+            const text = document.getElementById("sceneText");
+
+            image.src = scene.image;
+            image.alt = scene.title;
+
+            title.textContent = scene.title;
+            text.textContent = scene.text;
+
+
+            /* PAGE NUMBER */
+
+            document.getElementById("pageNumber").textContent =
+                (currentScene + 1) + " / " + scenes.length;
+
+
+            /* BACK BUTTON */
+
+            document.getElementById("backButton").disabled =
+                currentScene === 0;
+
+
+            /* NEXT BUTTON */
+
+            if (currentScene === scenes.length - 1) {
+
+                document.getElementById("nextButton").textContent =
+                    "The End ❤️";
+
+            } else {
+
+                document.getElementById("nextButton").textContent =
+                    "Next ❤️ →";
+            }
+
+
+            /* RESTART ANIMATION */
+
+            const sceneBox = document.querySelector(".scene");
+
+            sceneBox.style.animation = "none";
+
+            void sceneBox.offsetWidth;
+
+            sceneBox.style.animation = "fadeIn 0.7s ease";
+        }
+
+
+        /* ============================
+           NEXT SCENE
+        ============================ */
+
+        function nextScene() {
+
+            if (currentScene < scenes.length - 1) {
+
+                currentScene++;
+
+                showScene();
+            }
+        }
+
+
+        /* ============================
+           PREVIOUS SCENE
+        ============================ */
+
+        function previousScene() {
+
+            if (currentScene > 0) {
+
+                currentScene--;
+
+                showScene();
+            }
+        }
+
+
+        /* ============================
+           START STORY
+        ============================ */
+
+        showScene();
+
+    </script>
 
 </body>
 </html>
