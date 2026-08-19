@@ -8,6 +8,7 @@
     <title>Our Love Story ❤️</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -15,7 +16,13 @@
         body {
             margin: 0;
             min-height: 100vh;
-            background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+
+            background: linear-gradient(
+                135deg,
+                #fff0f5,
+                #ffe4ec
+            );
+
             font-family: Georgia, serif;
             color: #5a1745;
 
@@ -24,17 +31,24 @@
             align-items: center;
         }
 
+
+        /* STORYBOOK */
+
         .storybook {
             width: 100%;
             max-width: 1100px;
+
             min-height: 100vh;
+
             padding: 25px 20px;
 
             display: flex;
             flex-direction: column;
+
             justify-content: center;
             align-items: center;
         }
+
 
         /* TITLE */
 
@@ -43,28 +57,41 @@
             margin-bottom: 15px;
         }
 
+
         .title h1 {
             margin: 0;
+
             font-size: 42px;
+
+            color: #8b285f;
         }
+
 
         .title p {
             margin: 8px 0;
+
             font-size: 20px;
+
+            color: #8b5265;
         }
+
 
         /* SCENE */
 
         .scene {
             width: 100%;
+
             text-align: center;
 
             animation: fadeIn 0.7s ease;
         }
 
+
         .scene img {
             width: 100%;
+
             max-width: 950px;
+
             max-height: 68vh;
 
             object-fit: contain;
@@ -77,40 +104,59 @@
             background: white;
         }
 
+
         .scene h2 {
             font-size: 30px;
+
             margin: 18px 10px 8px;
+
+            color: #7b2454;
         }
+
 
         .scene p {
             font-size: 19px;
+
             line-height: 1.5;
+
             margin: 8px auto;
+
             max-width: 800px;
+
+            color: #6b3155;
         }
+
 
         /* CONTROLS */
 
         .controls {
             width: 100%;
+
             max-width: 950px;
 
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
 
             margin-top: 20px;
         }
 
+
         button {
             border: none;
+
             background: #f58b9b;
+
             color: white;
 
             font-family: Georgia, serif;
+
             font-size: 17px;
 
             padding: 12px 24px;
+
             border-radius: 30px;
 
             cursor: pointer;
@@ -118,43 +164,59 @@
             transition: all 0.3s ease;
         }
 
+
         button:hover {
             background: #df6f84;
+
             transform: scale(1.06);
         }
 
+
         button:disabled {
             background: #d9b8c0;
+
             cursor: not-allowed;
+
             transform: none;
         }
 
+
         .page-number {
             font-size: 17px;
+
             color: #8b5265;
         }
+
 
         /* HEARTS */
 
         .hearts {
             font-size: 20px;
+
             margin-top: 12px;
+
             letter-spacing: 5px;
         }
+
 
         /* ANIMATION */
 
         @keyframes fadeIn {
+
             from {
                 opacity: 0;
+
                 transform: translateY(15px);
             }
 
             to {
                 opacity: 1;
+
                 transform: translateY(0);
             }
+
         }
+
 
         /* MOBILE */
 
@@ -164,270 +226,431 @@
                 padding: 15px 10px;
             }
 
+
             .title h1 {
                 font-size: 30px;
             }
+
 
             .title p {
                 font-size: 17px;
             }
 
+
             .scene img {
                 max-height: 55vh;
+
                 border-radius: 12px;
             }
+
 
             .scene h2 {
                 font-size: 23px;
             }
 
+
             .scene p {
                 font-size: 16px;
             }
 
+
             button {
                 padding: 10px 17px;
+
                 font-size: 15px;
             }
+
         }
+
     </style>
+
 </head>
 
 
 <body>
 
-    <div class="storybook">
 
-        <!-- TITLE -->
-
-        <div class="title">
-            <h1>Our Love Story ❤️</h1>
-            <p>August 19, 2023 ✨</p>
-        </div>
+<div class="storybook">
 
 
-        <!-- STORY SCENE -->
+    <!-- TITLE -->
 
-        <div class="scene">
+    <div class="title">
 
-            <img id="sceneImage" src="" alt="Our love story">
+        <h1>
+            Our Love Story ❤️
+        </h1>
 
-            <h2 id="sceneTitle"></h2>
-
-            <p id="sceneText"></p>
-
-        </div>
-
-
-        <!-- NAVIGATION -->
-
-        <div class="controls">
-
-            <button id="backButton" onclick="previousScene()">
-                ← Back
-            </button>
-
-            <div class="page-number">
-                <span id="pageNumber">1 / 5</span>
-            </div>
-
-            <button id="nextButton" onclick="nextScene()">
-                Next ❤️ →
-            </button>
-
-        </div>
-
-
-        <div class="hearts">
-            ❤️ ✨ ❤️ ✨ ❤️
-        </div>
+        <p>
+            August 19, 2023 ✨
+        </p>
 
     </div>
 
 
-    <script>
 
-        /* ============================
-           OUR STORY SCENES
-        ============================ */
+    <!-- STORY SCENE -->
 
-        const scenes = [
+    <div class="scene">
 
-            /* SCENE 1 */
+        <img
+            id="sceneImage"
+            src=""
+            alt="Our love story"
+        >
 
-            {
-                image: "first-meeting.png.png",
+        <h2 id="sceneTitle"></h2>
 
-                title: "The day our story began... 💕",
+        <p id="sceneText"></p>
 
-                text:
-                    "A simple “Hi” that changed everything. ❤️"
-            },
+    </div>
 
 
-            /* SCENE 2 */
 
-            {
-                image: "Agreed.png.png",
+    <!-- NAVIGATION -->
 
-                title: "And then... our families said YES ❤️",
+    <div class="controls">
 
-                text:
-                    "A beautiful phone call between two fathers... " +
-                    "and with love and happiness, both families agreed " +
-                    "to bring Sathya and Kishore together. 💍❤️"
-            },
+        <button
+            id="backButton"
+            onclick="previousScene()"
+        >
+            ← Back
+        </button>
 
 
-            /* SCENE 3 */
+        <div class="page-number">
 
-            {
-                image: "FamilyMeeting.png.png",
+            <span id="pageNumber">
+                1 / 5
+            </span>
 
-                title: "Two Families, One Beautiful Journey ❤️",
+        </div>
 
-                text:
-                    "Sathya's family went to Kishore's home to meet his family. " +
-                    "Parents, sisters, aunts and uncles gathered together, " +
-                    "bringing two families closer. 🏡👨‍👩‍👧‍👦💕"
-            },
 
+        <button
+            id="nextButton"
+            onclick="nextScene()"
+        >
+            Next ❤️ →
+        </button>
 
-            /* SCENE 4 */
+    </div>
 
-            {
-                image: "FirstChat.png.png",
 
-                title: "Our First WhatsApp Chat 📱❤️",
 
-                text:
-                    "September 2023 — a simple “Hi” became the beginning " +
-                    "of our beautiful conversations. 💕"
-            },
+    <!-- HEARTS -->
 
+    <div class="hearts">
 
-            /* SCENE 5 */
+        ❤️ ✨ ❤️ ✨ ❤️
 
-            {
-                image: "bike puncture.png.png",
+    </div>
 
-                title: "Our First Date... But Not Without a Little Drama! 🏍️❤️",
 
-                text:
-                    "Kishore was on his Royal Enfield, on his way to meet Sathya... " +
-                    "but suddenly, the bike got a puncture! 😭 " +
-                    "Sathya kept waiting and waiting... while Kishore finally took " +
-                    "the blue Suzuki Dzire to meet her. After all that waiting, " +
-                    "he finally arrived... and our first date could begin. ❤️"
-            }
+</div>
 
-        ];
 
 
-        /* ============================
-           CURRENT SCENE
-        ============================ */
+<script>
 
-        let currentScene = 0;
 
+/* ==================================
+   OUR LOVE STORY - 5 SCENES
+================================== */
 
-        /* ============================
-           SHOW SCENE
-        ============================ */
 
-        function showScene() {
+const scenes = [
 
-            const scene = scenes[currentScene];
 
-            const image = document.getElementById("sceneImage");
-            const title = document.getElementById("sceneTitle");
-            const text = document.getElementById("sceneText");
+    /* ================================
+       SCENE 1
+    ================================= */
 
+    {
 
-            image.src = scene.image;
+        image: "first-meeting.png.png",
 
-            image.alt = scene.title;
+        title:
+            "The day our story began... 💕",
 
-            title.textContent = scene.title;
+        text:
+            "A simple “Hi” that changed everything. ❤️"
 
-            text.textContent = scene.text;
+    },
 
 
-            /* PAGE NUMBER */
+    /* ================================
+       SCENE 2
+    ================================= */
 
-            document.getElementById("pageNumber").textContent =
-                (currentScene + 1) + " / " + scenes.length;
+    {
 
+        image: "Agreed.png.png",
 
-            /* BACK BUTTON */
+        title:
+            "And then... our families said YES ❤️",
 
-            document.getElementById("backButton").disabled =
-                currentScene === 0;
+        text:
+            "A beautiful phone call between two fathers... " +
+            "and with love and happiness, both families agreed " +
+            "to bring Sathya and Kishore together. 💍❤️"
 
+    },
 
-            /* NEXT BUTTON */
 
-            if (currentScene === scenes.length - 1) {
+    /* ================================
+       SCENE 3
+    ================================= */
 
-                document.getElementById("nextButton").textContent =
-                    "The End ❤️";
+    {
 
-            } else {
+        image: "FamilyMeeting.png.png",
 
-                document.getElementById("nextButton").textContent =
-                    "Next ❤️ →";
-            }
+        title:
+            "Two Families, One Beautiful Journey ❤️",
 
+        text:
+            "Sathya's family went to Kishore's home to meet his family. " +
+            "Parents, sisters, aunts and uncles gathered together, " +
+            "bringing two families closer. 🏡👨‍👩‍👧‍👦💕"
 
-            /* RESTART ANIMATION */
+    },
 
-            const sceneBox = document.querySelector(".scene");
 
-            sceneBox.style.animation = "none";
+    /* ================================
+       SCENE 4
+    ================================= */
 
-            void sceneBox.offsetWidth;
+    {
 
-            sceneBox.style.animation = "fadeIn 0.7s ease";
-        }
+        image: "FirstChat.png.png",
 
+        title:
+            "Our First WhatsApp Chat 📱❤️",
 
-        /* ============================
-           NEXT SCENE
-        ============================ */
+        text:
+            "September 2023 — a simple “Hi” became the beginning " +
+            "of our beautiful conversations. 💕"
 
-        function nextScene() {
+    },
 
-            if (currentScene < scenes.length - 1) {
 
-                currentScene++;
+    /* ================================
+       SCENE 5
+    ================================= */
 
-                showScene();
-            }
-        }
+    {
 
+        image: "bike puncture.png.png",
 
-        /* ============================
-           PREVIOUS SCENE
-        ============================ */
+        title:
+            "Our First Date... But Not Without a Little Drama! 🏍️❤️",
 
-        function previousScene() {
+        text:
+            "Kishore was on his Royal Enfield, on his way to meet Sathya... " +
+            "but suddenly, the bike got a puncture! 😭 " +
+            "Sathya kept waiting for him for so long... " +
+            "so Kishore finally took the blue Suzuki Dzire to meet her. " +
+            "After all that waiting, he finally arrived... " +
+            "and our first date began. ❤️"
 
-            if (currentScene > 0) {
+    }
 
-                currentScene--;
 
-                showScene();
-            }
-        }
+];
 
 
-        /* ============================
-           START STORY
-        ============================ */
+
+/* ==================================
+   CURRENT SCENE
+================================== */
+
+
+let currentScene = 0;
+
+
+
+/* ==================================
+   SHOW SCENE
+================================== */
+
+
+function showScene() {
+
+
+    const scene =
+        scenes[currentScene];
+
+
+    const image =
+        document.getElementById(
+            "sceneImage"
+        );
+
+
+    const title =
+        document.getElementById(
+            "sceneTitle"
+        );
+
+
+    const text =
+        document.getElementById(
+            "sceneText"
+        );
+
+
+
+    /* IMAGE */
+
+    image.src =
+        scene.image;
+
+
+    image.alt =
+        scene.title;
+
+
+
+    /* TITLE */
+
+    title.textContent =
+        scene.title;
+
+
+
+    /* TEXT */
+
+    text.textContent =
+        scene.text;
+
+
+
+    /* PAGE NUMBER */
+
+    document.getElementById(
+        "pageNumber"
+    ).textContent =
+
+        (currentScene + 1)
+        + " / "
+        + scenes.length;
+
+
+
+    /* BACK BUTTON */
+
+    document.getElementById(
+        "backButton"
+    ).disabled =
+
+        currentScene === 0;
+
+
+
+    /* NEXT BUTTON */
+
+    if (
+        currentScene ===
+        scenes.length - 1
+    ) {
+
+        document.getElementById(
+            "nextButton"
+        ).textContent =
+            "The End ❤️";
+
+    }
+
+    else {
+
+        document.getElementById(
+            "nextButton"
+        ).textContent =
+            "Next ❤️ →";
+
+    }
+
+
+
+    /* RESTART ANIMATION */
+
+    const sceneBox =
+        document.querySelector(
+            ".scene"
+        );
+
+
+    sceneBox.style.animation =
+        "none";
+
+
+    void sceneBox.offsetWidth;
+
+
+    sceneBox.style.animation =
+        "fadeIn 0.7s ease";
+
+}
+
+
+
+/* ==================================
+   NEXT SCENE
+================================== */
+
+
+function nextScene() {
+
+
+    if (
+        currentScene <
+        scenes.length - 1
+    ) {
+
+        currentScene++;
 
         showScene();
 
-    </script>
+    }
+
+}
+
+
+
+/* ==================================
+   PREVIOUS SCENE
+================================== */
+
+
+function previousScene() {
+
+
+    if (
+        currentScene > 0
+    ) {
+
+        currentScene--;
+
+        showScene();
+
+    }
+
+}
+
+
+
+/* ==================================
+   START STORY
+================================== */
+
+
+showScene();
+
+
+</script>
+
 
 </body>
 
