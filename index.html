@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -192,6 +193,7 @@
     </style>
 </head>
 
+
 <body>
 
     <div class="storybook">
@@ -226,7 +228,7 @@
             </button>
 
             <div class="page-number">
-                <span id="pageNumber">1 / 4</span>
+                <span id="pageNumber">1 / 5</span>
             </div>
 
             <button id="nextButton" onclick="nextScene()">
@@ -234,6 +236,7 @@
             </button>
 
         </div>
+
 
         <div class="hearts">
             ❤️ ✨ ❤️ ✨ ❤️
@@ -250,6 +253,8 @@
 
         const scenes = [
 
+            /* SCENE 1 */
+
             {
                 image: "first-meeting.png.png",
 
@@ -259,6 +264,8 @@
                     "A simple “Hi” that changed everything. ❤️"
             },
 
+
+            /* SCENE 2 */
 
             {
                 image: "Agreed.png.png",
@@ -272,6 +279,8 @@
             },
 
 
+            /* SCENE 3 */
+
             {
                 image: "FamilyMeeting.png.png",
 
@@ -284,6 +293,8 @@
             },
 
 
+            /* SCENE 4 */
+
             {
                 image: "FirstChat.png.png",
 
@@ -292,6 +303,22 @@
                 text:
                     "September 2023 — a simple “Hi” became the beginning " +
                     "of our beautiful conversations. 💕"
+            },
+
+
+            /* SCENE 5 */
+
+            {
+                image: "bike puncture.png.png",
+
+                title: "Our First Date... But Not Without a Little Drama! 🏍️❤️",
+
+                text:
+                    "Kishore was on his Royal Enfield, on his way to meet Sathya... " +
+                    "but suddenly, the bike got a puncture! 😭 " +
+                    "Sathya kept waiting and waiting... while Kishore finally took " +
+                    "the blue Suzuki Dzire to meet her. After all that waiting, " +
+                    "he finally arrived... and our first date could begin. ❤️"
             }
 
         ];
@@ -316,10 +343,13 @@
             const title = document.getElementById("sceneTitle");
             const text = document.getElementById("sceneText");
 
+
             image.src = scene.image;
+
             image.alt = scene.title;
 
             title.textContent = scene.title;
+
             text.textContent = scene.text;
 
 
@@ -400,4 +430,5 @@
     </script>
 
 </body>
+
 </html>
