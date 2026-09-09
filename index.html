@@ -1,657 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Our Love Story ❤️</title>
+    <title>Kishore ❤️ Sathya | Our Love Story</title>
 
     <style>
-
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            min-height: 100vh;
-
-            background: linear-gradient(
-                135deg,
-                #fff0f5,
-                #ffe4ec
-            );
-
-            font-family: Georgia, serif;
-            color: #5a1745;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: "Georgia", serif;
+            background: linear-gradient(135deg, #fff0f5, #ffe4ec, #fff8f0);
+            color: #4a2630;
+            text-align: center;
         }
 
-
-        /* STORYBOOK */
-
-        .storybook {
-            width: 100%;
-            max-width: 1100px;
-
+        /* HEADER */
+        header {
             min-height: 100vh;
-
-            padding: 25px 20px;
-
             display: flex;
             flex-direction: column;
-
             justify-content: center;
             align-items: center;
+            padding: 30px;
         }
 
+        header h1 {
+            font-size: 48px;
+            color: #c2185b;
+            margin-bottom: 20px;
+        }
 
-        /* TITLE */
-
-        .title {
-            text-align: center;
+        header h2 {
+            font-size: 28px;
+            color: #7b3048;
             margin-bottom: 15px;
         }
 
-
-        .title h1 {
-            margin: 0;
-
-            font-size: 42px;
-
-            color: #8b285f;
+        header p {
+            font-size: 19px;
+            max-width: 650px;
+            line-height: 1.7;
         }
 
-
-        .title p {
-            margin: 8px 0;
-
-            font-size: 20px;
-
-            color: #8b5265;
+        .heart {
+            font-size: 65px;
+            animation: heartbeat 1.5s infinite;
+            margin-bottom: 20px;
         }
 
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
 
-        /* SCENE */
+            50% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .start-button {
+            margin-top: 30px;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 30px;
+            background: #c2185b;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .start-button:hover {
+            background: #9c1748;
+        }
+
+        /* STORY */
+        .story {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+        }
 
         .scene {
-            width: 100%;
-
-            text-align: center;
-
-            animation: fadeIn 0.7s ease;
+            min-height: 100vh;
+            padding: 70px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(194, 24, 91, 0.15);
         }
 
+        .scene-number {
+            color: #c2185b;
+            font-size: 17px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .scene h2 {
+            font-size: 34px;
+            color: #9c1748;
+            margin-bottom: 20px;
+        }
 
         .scene img {
             width: 100%;
-
-            max-width: 950px;
-
-            max-height: 68vh;
-
+            max-width: 700px;
+            max-height: 600px;
             object-fit: contain;
-
             border-radius: 20px;
-
-            box-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.25);
-
+            box-shadow: 0 10px 30px rgba(100, 30, 50, 0.2);
             background: white;
+            padding: 8px;
         }
 
-
-        .scene h2 {
-            font-size: 30px;
-
-            margin: 18px 10px 8px;
-
-            color: #7b2454;
-        }
-
-
-        .scene p {
+        .caption {
+            max-width: 700px;
+            margin-top: 25px;
             font-size: 19px;
-
-            line-height: 1.5;
-
-            margin: 8px auto;
-
-            max-width: 800px;
-
-            color: #6b3155;
+            line-height: 1.8;
         }
 
-
-        /* CONTROLS */
-
-        .controls {
-            width: 100%;
-
-            max-width: 950px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            margin-top: 20px;
-        }
-
-
-        button {
-            border: none;
-
-            background: #f58b9b;
-
-            color: white;
-
-            font-family: Georgia, serif;
-
-            font-size: 17px;
-
-            padding: 12px 24px;
-
-            border-radius: 30px;
-
-            cursor: pointer;
-
-            transition: all 0.3s ease;
-        }
-
-
-        button:hover {
-            background: #df6f84;
-
-            transform: scale(1.06);
-        }
-
-
-        button:disabled {
-            background: #d9b8c0;
-
-            cursor: not-allowed;
-
-            transform: none;
-        }
-
-
-        .page-number {
-            font-size: 17px;
-
-            color: #8b5265;
-        }
-
-
-        /* HEARTS */
-
-        .hearts {
-            font-size: 20px;
-
+        .date {
             margin-top: 12px;
-
-            letter-spacing: 5px;
+            font-size: 15px;
+            color: #9c6170;
+            font-style: italic;
         }
 
-
-        /* ANIMATION */
-
-        @keyframes fadeIn {
-
-            from {
-                opacity: 0;
-
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-
-                transform: translateY(0);
-            }
-
+        /* FOOTER */
+        footer {
+            padding: 70px 20px;
+            background: #fff0f5;
         }
 
+        footer h2 {
+            font-size: 32px;
+            color: #c2185b;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .forever {
+            font-size: 25px;
+            margin-top: 25px;
+            color: #9c1748;
+        }
 
         /* MOBILE */
-
         @media (max-width: 600px) {
 
-            .storybook {
-                padding: 15px 10px;
+            header h1 {
+                font-size: 36px;
             }
 
-
-            .title h1 {
-                font-size: 30px;
-            }
-
-
-            .title p {
-                font-size: 17px;
-            }
-
-
-            .scene img {
-                max-height: 55vh;
-
-                border-radius: 12px;
-            }
-
-
-            .scene h2 {
+            header h2 {
                 font-size: 23px;
             }
 
-
-            .scene p {
-                font-size: 16px;
+            .scene h2 {
+                font-size: 28px;
             }
 
-
-            button {
-                padding: 10px 17px;
-
-                font-size: 15px;
+            .caption {
+                font-size: 17px;
             }
 
+            .scene {
+                padding: 50px 15px;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
+    <!-- INTRODUCTION -->
+    <header>
 
-<div class="storybook">
+        <div class="heart">❤️</div>
 
+        <h1>Kishore & Sathya</h1>
 
-    <!-- TITLE -->
-
-    <div class="title">
-
-        <h1>
-            Our Love Story ❤️
-        </h1>
+        <h2>Our Love Story</h2>
 
         <p>
-            August 19, 2023 ✨
+            Some stories are written in books...
+            ours was written in little moments,
+            conversations, smiles, memories and love.
         </p>
 
-    </div>
+        <p style="margin-top: 15px;">
+            From the day we first met,
+            to all the beautiful memories we created together...
+        </p>
+
+        <a href="#scene1" class="start-button">
+            Start Our Story ❤️
+        </a>
+
+    </header>
 
 
-
-    <!-- STORY SCENE -->
-
-    <div class="scene">
-
-        <img
-            id="sceneImage"
-            src=""
-            alt="Our love story"
-        >
-
-        <h2 id="sceneTitle"></h2>
-
-        <p id="sceneText"></p>
-
-    </div>
+    <!-- STORY -->
+    <main class="story">
 
 
+        <!-- SCENE 1 -->
+        <section class="scene" id="scene1">
 
-    <!-- NAVIGATION -->
+            <div class="scene-number">
+                CHAPTER 01
+            </div>
 
-    <div class="controls">
+            <h2>Our First Meeting ❤️</h2>
 
-        <button
-            id="backButton"
-            onclick="previousScene()"
-        >
-            ← Back
-        </button>
+            <img src="first-meeting.png (2).png"
+                 alt="Kishore and Sathya first meeting">
+
+            <p class="caption">
+                And then, on August 19, 2023,
+                two strangers met for the first time...
+                without knowing that this moment
+                would become the beginning of their story. ❤️
+            </p>
+
+            <p class="date">
+                August 19, 2023
+            </p>
+
+        </section>
 
 
-        <div class="page-number">
+        <!-- SCENE 2 -->
+        <section class="scene" id="scene2">
 
-            <span id="pageNumber">
-                1 / 5
-            </span>
+            <div class="scene-number">
+                CHAPTER 02
+            </div>
 
+            <h2>We Said Yes 💕</h2>
+
+            <img src="Agreed.png.png"
+                 alt="Kishore and Sathya agreed">
+
+            <p class="caption">
+                What started with a meeting slowly became
+                something special.
+                Two hearts began walking in the same direction. 💕
+            </p>
+
+        </section>
+
+
+        <!-- SCENE 3 -->
+        <section class="scene" id="scene3">
+
+            <div class="scene-number">
+                CHAPTER 03
+            </div>
+
+            <h2>Family Meeting 🏡</h2>
+
+            <img src="FamilyMeeting.png.png"
+                 alt="Family meeting">
+
+            <p class="caption">
+                Love isn't just about two people.
+                It is also about two families coming together
+                and becoming part of one beautiful story. ❤️
+            </p>
+
+        </section>
+
+
+        <!-- SCENE 4 -->
+        <section class="scene" id="scene4">
+
+            <div class="scene-number">
+                CHAPTER 04
+            </div>
+
+            <h2>Our First Chat 📱</h2>
+
+            <img src="FirstChat.png.png"
+                 alt="Kishore and Sathya first chat">
+
+            <p class="caption">
+                A simple message...
+                a small conversation...
+                and suddenly, talking to each other
+                became the favourite part of the day. 😊❤️
+            </p>
+
+        </section>
+
+
+        <!-- SCENE 5 -->
+        <section class="scene" id="scene5">
+
+            <div class="scene-number">
+                CHAPTER 05
+            </div>
+
+            <h2>The Bike Adventure 🛵</h2>
+
+            <img src="bike puncture.png.png"
+                 alt="Kishore and Sathya bike puncture">
+
+            <p class="caption">
+                Every love story needs a little adventure.
+                And ours came with a bike,
+                a journey,
+                and of course... a little unexpected trouble! 😂❤️
+            </p>
+
+        </section>
+
+
+        <!-- SCENE 6 -->
+        <section class="scene" id="scene6">
+
+            <div class="scene-number">
+                CHAPTER 06
+            </div>
+
+            <h2>Our Marina Mall Memory 🛍️</h2>
+
+            <img src="Marina mall.png.png"
+                 alt="Kishore and Sathya at Marina Mall">
+
+            <p class="caption">
+                A simple outing became another beautiful memory.
+                Walking together,
+                shopping together,
+                laughing together...
+                that's what made ordinary days special. ❤️
+            </p>
+
+        </section>
+
+
+        <!-- SCENE 7 -->
+        <section class="scene" id="scene7">
+
+            <div class="scene-number">
+                CHAPTER 07
+            </div>
+
+            <h2>A Special Temple Visit 🛕</h2>
+
+            <img src="temple.png.png"
+                 alt="Kishore and Sathya temple visit">
+
+            <p class="caption">
+                Some moments are peaceful,
+                some are emotional,
+                and some stay quietly in our hearts forever.
+                This was one of those moments. ❤️
+            </p>
+
+        </section>
+
+
+        <!-- SCENE 8 -->
+        <section class="scene" id="scene8">
+
+            <div class="scene-number">
+                CHAPTER 08
+            </div>
+
+            <h2>Movie Time 🎬</h2>
+
+            <img src="movie.png.png"
+                 alt="Kishore and Sathya movie">
+
+            <p class="caption">
+                Just the two of us,
+                sitting together in the theatre,
+                enjoying our little world
+                while the movie played on the screen. 🎬❤️
+            </p>
+
+        </section>
+
+
+        <!-- SCENE 9 -->
+        <section class="scene" id="scene9">
+
+            <div class="scene-number">
+                CHAPTER 09
+            </div>
+
+            <h2>That One Call 📞❤️</h2>
+
+            <img src="calling.png.png"
+                 alt="Kishore and Sathya phone call">
+
+            <p class="caption">
+                Even after a long day,
+                hearing each other's voice
+                could make everything feel better.
+
+                Sometimes love is simply...
+                "Are you home?"
+                "Did you eat?"
+                "Take care."
+                ❤️
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- END -->
+    <footer>
+
+        <h2>And Our Story Continues... ❤️</h2>
+
+        <p>
+            These are only a few chapters
+            of our beautiful journey.
+        </p>
+
+        <p>
+            There are still so many memories to create,
+            so many places to go,
+            so many laughs to share...
+        </p>
+
+        <div class="forever">
+            Kishore ❤️ Sathya<br>
+            Forever & Always
         </div>
 
-
-        <button
-            id="nextButton"
-            onclick="nextScene()"
-        >
-            Next ❤️ →
-        </button>
-
-    </div>
-
-
-
-    <!-- HEARTS -->
-
-    <div class="hearts">
-
-        ❤️ ✨ ❤️ ✨ ❤️
-
-    </div>
-
-
-</div>
-
-
-
-<script>
-
-
-/* ==================================
-   OUR LOVE STORY - 5 SCENES
-================================== */
-
-
-const scenes = [
-
-
-    /* ================================
-       SCENE 1
-    ================================= */
-
-    {
-
-        image: "first-meeting.png.png",
-
-        title:
-            "The day our story began... 💕",
-
-        text:
-            "A simple “Hi” that changed everything. ❤️"
-
-    },
-
-
-    /* ================================
-       SCENE 2
-    ================================= */
-
-    {
-
-        image: "Agreed.png.png",
-
-        title:
-            "And then... our families said YES ❤️",
-
-        text:
-            "A beautiful phone call between two fathers... " +
-            "and with love and happiness, both families agreed " +
-            "to bring Sathya and Kishore together. 💍❤️"
-
-    },
-
-
-    /* ================================
-       SCENE 3
-    ================================= */
-
-    {
-
-        image: "FamilyMeeting.png.png",
-
-        title:
-            "Two Families, One Beautiful Journey ❤️",
-
-        text:
-            "Sathya's family went to Kishore's home to meet his family. " +
-            "Parents, sisters, aunts and uncles gathered together, " +
-            "bringing two families closer. 🏡👨‍👩‍👧‍👦💕"
-
-    },
-
-
-    /* ================================
-       SCENE 4
-    ================================= */
-
-    {
-
-        image: "FirstChat.png.png",
-
-        title:
-            "Our First WhatsApp Chat 📱❤️",
-
-        text:
-            "September 2023 — a simple “Hi” became the beginning " +
-            "of our beautiful conversations. 💕"
-
-    },
-
-
-    /* ================================
-       SCENE 5
-    ================================= */
-
-    {
-
-        image: "bike puncture.png.png",
-
-        title:
-            "Our First Date... But Not Without a Little Drama! 🏍️❤️",
-
-        text:
-            "Kishore was on his Royal Enfield, on his way to meet Sathya... " +
-            "but suddenly, the bike got a puncture! 😭 " +
-            "Sathya kept waiting for him for so long... " +
-            "so Kishore finally took the blue Suzuki Dzire to meet her. " +
-            "After all that waiting, he finally arrived... " +
-            "and our first date began. ❤️"
-
-    }
-
-
-];
-
-
-
-/* ==================================
-   CURRENT SCENE
-================================== */
-
-
-let currentScene = 0;
-
-
-
-/* ==================================
-   SHOW SCENE
-================================== */
-
-
-function showScene() {
-
-
-    const scene =
-        scenes[currentScene];
-
-
-    const image =
-        document.getElementById(
-            "sceneImage"
-        );
-
-
-    const title =
-        document.getElementById(
-            "sceneTitle"
-        );
-
-
-    const text =
-        document.getElementById(
-            "sceneText"
-        );
-
-
-
-    /* IMAGE */
-
-    image.src =
-        scene.image;
-
-
-    image.alt =
-        scene.title;
-
-
-
-    /* TITLE */
-
-    title.textContent =
-        scene.title;
-
-
-
-    /* TEXT */
-
-    text.textContent =
-        scene.text;
-
-
-
-    /* PAGE NUMBER */
-
-    document.getElementById(
-        "pageNumber"
-    ).textContent =
-
-        (currentScene + 1)
-        + " / "
-        + scenes.length;
-
-
-
-    /* BACK BUTTON */
-
-    document.getElementById(
-        "backButton"
-    ).disabled =
-
-        currentScene === 0;
-
-
-
-    /* NEXT BUTTON */
-
-    if (
-        currentScene ===
-        scenes.length - 1
-    ) {
-
-        document.getElementById(
-            "nextButton"
-        ).textContent =
-            "The End ❤️";
-
-    }
-
-    else {
-
-        document.getElementById(
-            "nextButton"
-        ).textContent =
-            "Next ❤️ →";
-
-    }
-
-
-
-    /* RESTART ANIMATION */
-
-    const sceneBox =
-        document.querySelector(
-            ".scene"
-        );
-
-
-    sceneBox.style.animation =
-        "none";
-
-
-    void sceneBox.offsetWidth;
-
-
-    sceneBox.style.animation =
-        "fadeIn 0.7s ease";
-
-}
-
-
-
-/* ==================================
-   NEXT SCENE
-================================== */
-
-
-function nextScene() {
-
-
-    if (
-        currentScene <
-        scenes.length - 1
-    ) {
-
-        currentScene++;
-
-        showScene();
-
-    }
-
-}
-
-
-
-/* ==================================
-   PREVIOUS SCENE
-================================== */
-
-
-function previousScene() {
-
-
-    if (
-        currentScene > 0
-    ) {
-
-        currentScene--;
-
-        showScene();
-
-    }
-
-}
-
-
-
-/* ==================================
-   START STORY
-================================== */
-
-
-showScene();
-
-
-</script>
+    </footer>
 
 
 </body>
-
 </html>
