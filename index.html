@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,178 +14,329 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: "Georgia", serif;
-            background: linear-gradient(135deg, #fff0f5, #ffe4ec, #fff8f0);
-            color: #4a2630;
-            text-align: center;
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
-        /* HEADER */
-        header {
-            min-height: 100vh;
+        body {
+            font-family: Georgia, serif;
+            background: #160a10;
+            color: white;
+        }
+
+        /* =========================
+           MOVIE CONTAINER
+        ========================= */
+
+        .movie {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #160a10;
+        }
+
+        /* =========================
+           SCENE
+        ========================= */
+
+        .scene {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.08);
+            transition:
+                opacity 1.5s ease,
+                transform 7s ease;
+        }
+
+        .scene.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .scene img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Dark cinematic overlay */
+
+        .scene::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.55),
+                    rgba(0,0,0,0.10) 40%,
+                    rgba(0,0,0,0.75)
+                );
+            z-index: 1;
+        }
+
+        /* =========================
+           TEXT
+        ========================= */
+
+        .caption {
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            bottom: 12%;
+            z-index: 3;
+            text-align: center;
+
+            opacity: 0;
+            transform: translateY(35px);
+
+            transition:
+                opacity 1.2s ease 0.6s,
+                transform 1.2s ease 0.6s;
+        }
+
+        .scene.active .caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .caption h2 {
+            font-size: clamp(28px, 5vw, 55px);
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+
+        .caption p {
+            font-size: clamp(16px, 2vw, 24px);
+            line-height: 1.7;
+            max-width: 900px;
+            margin: auto;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.9);
+        }
+
+        /* =========================
+           OPENING
+        ========================= */
+
+        .opening {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 30px;
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #5c1838,
+                    #210b16 55%,
+                    #090306
+                );
+
+            transition: opacity 1.5s ease;
         }
 
-        header h1 {
-            font-size: 48px;
-            color: #c2185b;
-            margin-bottom: 20px;
+        .opening.hide {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        header h2 {
-            font-size: 28px;
-            color: #7b3048;
+        .opening h1 {
+            font-size: clamp(42px, 8vw, 90px);
+            color: #ffd8e7;
             margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(255,180,210,0.6);
+            animation: heartbeat 2s infinite;
         }
 
-        header p {
-            font-size: 19px;
-            max-width: 650px;
-            line-height: 1.7;
+        .opening h2 {
+            font-size: clamp(20px, 3vw, 32px);
+            font-weight: normal;
+            color: #fff1f6;
+            margin-bottom: 12px;
         }
 
-        .heart {
-            font-size: 65px;
-            animation: heartbeat 1.5s infinite;
-            margin-bottom: 20px;
+        .opening p {
+            font-size: 18px;
+            color: #e9bdcc;
+            margin-bottom: 35px;
+            font-style: italic;
+        }
+
+        .start-btn {
+            border: 1px solid rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.12);
+            color: white;
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .start-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
         }
 
         @keyframes heartbeat {
-            0% {
+            0%, 100% {
                 transform: scale(1);
             }
 
             50% {
-                transform: scale(1.15);
+                transform: scale(1.04);
+            }
+        }
+
+        /* =========================
+           FINAL SCENE
+        ========================= */
+
+        .ending {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            background:
+                radial-gradient(
+                    circle at center,
+                    #6b173d,
+                    #190710 70%
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 2s ease;
+        }
+
+        .ending.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .ending-content {
+            padding: 30px;
+            animation: endingZoom 3s ease forwards;
+        }
+
+        .ending h1 {
+            font-size: clamp(40px, 8vw, 85px);
+            color: #ffd7e6;
+            margin-bottom: 20px;
+        }
+
+        .ending h2 {
+            font-size: clamp(25px, 4vw, 45px);
+            margin-bottom: 25px;
+        }
+
+        .ending p {
+            font-size: clamp(17px, 2vw, 25px);
+            line-height: 1.8;
+            color: #f4cbd8;
+        }
+
+        @keyframes endingZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
             }
 
-            100% {
+            to {
+                opacity: 1;
                 transform: scale(1);
             }
         }
 
-        .start-button {
-            margin-top: 30px;
-            padding: 14px 30px;
-            border: none;
-            border-radius: 30px;
-            background: #c2185b;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
+        /* =========================
+           PROGRESS BAR
+        ========================= */
+
+        .progress {
+            position: absolute;
+            top: 18px;
+            left: 5%;
+            right: 5%;
+            height: 3px;
+            z-index: 15;
+            background: rgba(255,255,255,0.25);
+            border-radius: 10px;
         }
 
-        .start-button:hover {
-            background: #9c1748;
-        }
-
-        /* STORY */
-        .story {
-            width: 90%;
-            max-width: 900px;
-            margin: auto;
-        }
-
-        .scene {
-            min-height: 100vh;
-            padding: 70px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 1px solid rgba(194, 24, 91, 0.15);
-        }
-
-        .scene-number {
-            color: #c2185b;
-            font-size: 17px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .scene h2 {
-            font-size: 34px;
-            color: #9c1748;
-            margin-bottom: 20px;
-        }
-
-        .scene img {
-            width: 100%;
-            max-width: 700px;
-            max-height: 600px;
-            object-fit: contain;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(100, 30, 50, 0.2);
+        .progress-bar {
+            width: 0%;
+            height: 100%;
             background: white;
-            padding: 8px;
+            border-radius: 10px;
+            transition: width linear;
         }
 
-        .caption {
-            max-width: 700px;
-            margin-top: 25px;
-            font-size: 19px;
-            line-height: 1.8;
+        /* =========================
+           CONTROLS
+        ========================= */
+
+        .controls {
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            right: 0;
+            z-index: 16;
+
+            display: flex;
+            justify-content: center;
+            gap: 12px;
         }
 
-        .date {
-            margin-top: 12px;
-            font-size: 15px;
-            color: #9c6170;
-            font-style: italic;
+        .control-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(0,0,0,0.35);
+            color: white;
+            cursor: pointer;
+            font-size: 17px;
+            backdrop-filter: blur(8px);
         }
 
-        /* FOOTER */
-        footer {
-            padding: 70px 20px;
-            background: #fff0f5;
+        .control-btn:hover {
+            background: rgba(255,255,255,0.2);
         }
 
-        footer h2 {
-            font-size: 32px;
-            color: #c2185b;
-            margin-bottom: 20px;
-        }
+        /* =========================
+           MOBILE
+        ========================= */
 
-        footer p {
-            font-size: 18px;
-            line-height: 1.8;
-        }
-
-        .forever {
-            font-size: 25px;
-            margin-top: 25px;
-            color: #9c1748;
-        }
-
-        /* MOBILE */
         @media (max-width: 600px) {
 
-            header h1 {
-                font-size: 36px;
-            }
-
-            header h2 {
-                font-size: 23px;
-            }
-
-            .scene h2 {
-                font-size: 28px;
-            }
-
             .caption {
-                font-size: 17px;
+                bottom: 13%;
             }
 
-            .scene {
-                padding: 50px 15px;
+            .caption p {
+                line-height: 1.5;
+            }
+
+            .controls {
+                bottom: 15px;
             }
         }
     </style>
@@ -192,269 +344,519 @@
 
 <body>
 
-    <!-- INTRODUCTION -->
-    <header>
+<div class="movie">
 
-        <div class="heart">❤️</div>
+    <!-- =========================
+         BACKGROUND MUSIC
+    ========================= -->
 
-        <h1>Kishore & Sathya</h1>
+    <audio id="loveMusic" loop>
+        <source src="love-music.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- =========================
+         OPENING
+    ========================= -->
+
+    <div class="opening" id="opening">
+
+        <h1>Kishore ❤️ Sathya</h1>
 
         <h2>Our Love Story</h2>
 
         <p>
-            Some stories are written in books...
-            ours was written in little moments,
-            conversations, smiles, memories and love.
+            From one little "Hi" to a lifetime together...
         </p>
 
-        <p style="margin-top: 15px;">
-            From the day we first met,
-            to all the beautiful memories we created together...
-        </p>
+        <button class="start-btn" onclick="startMovie()">
+            ❤️ Start Our Story ❤️
+        </button>
 
-        <a href="#scene1" class="start-button">
-            Start Our Story ❤️
-        </a>
-
-    </header>
+    </div>
 
 
-    <!-- STORY -->
-    <main class="story">
+    <!-- =========================
+         PROGRESS
+    ========================= -->
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
 
 
-        <!-- SCENE 1 -->
-        <section class="scene" id="scene1">
+    <!-- =========================
+         SCENES
+    ========================= -->
 
-            <div class="scene-number">
-                CHAPTER 01
-            </div>
+    <section class="scene">
 
-            <h2>Our First Meeting ❤️</h2>
+        <img src="first-meeting.png" alt="First Meeting">
 
-            <img src="first-meeting.png (2).png"
-                 alt="Kishore and Sathya first meeting">
+        <div class="caption">
+            <h2>💕 The First Meeting</h2>
 
-            <p class="caption">
-                And then, on August 20, 2023,
-                two strangers met for the first time...
-                without knowing that this moment
-                would become the beginning of their story. ❤️
-            </p>
-
-            <p class="date">
+            <p>
                 August 20, 2023
+                <br>
+                Two families met... and two hearts quietly found each other.
             </p>
-
-        </section>
-
-
-        <!-- SCENE 2 -->
-        <section class="scene" id="scene2">
-
-            <div class="scene-number">
-                CHAPTER 02
-            </div>
-
-            <h2>We Said Yes 💕</h2>
-
-            <img src="Agreed.png.png"
-                 alt="Kishore and Sathya agreed">
-
-            <p class="caption">
-                What started with a meeting slowly became
-                something special.
-                Two hearts began walking in the same direction. 💕
-            </p>
-
-        </section>
-
-
-        <!-- SCENE 3 -->
-        <section class="scene" id="scene3">
-
-            <div class="scene-number">
-                CHAPTER 03
-            </div>
-
-            <h2>Family Meeting 🏡</h2>
-
-            <img src="FamilyMeeting.png.png"
-                 alt="Family meeting">
-
-            <p class="caption">
-                Love isn't just about two people.
-                It is also about two families coming together
-                and becoming part of one beautiful story. ❤️
-            </p>
-
-        </section>
-
-
-        <!-- SCENE 4 -->
-        <section class="scene" id="scene4">
-
-            <div class="scene-number">
-                CHAPTER 04
-            </div>
-
-            <h2>Our First Chat 📱</h2>
-
-            <img src="FirstChat.png.png"
-                 alt="Kishore and Sathya first chat">
-
-            <p class="caption">
-                A simple message...
-                a small conversation...
-                and suddenly, talking to each other
-                became the favourite part of the day. 😊❤️
-            </p>
-
-        </section>
-
-
-        <!-- SCENE 5 -->
-        <section class="scene" id="scene5">
-
-            <div class="scene-number">
-                CHAPTER 05
-            </div>
-
-            <h2>The Bike Adventure 🛵</h2>
-
-            <img src="bike puncture.png.png"
-                 alt="Kishore and Sathya bike puncture">
-
-            <p class="caption">
-                Every love story needs a little adventure.
-                And ours came with a bike,
-                a journey,
-                and of course... a little unexpected trouble! 😂❤️
-            </p>
-
-        </section>
-
-
-        <!-- SCENE 6 -->
-        <section class="scene" id="scene6">
-
-            <div class="scene-number">
-                CHAPTER 06
-            </div>
-
-            <h2>Our Marina Mall Memory 🛍️</h2>
-
-            <img src="Marina mall.png.png"
-                 alt="Kishore and Sathya at Marina Mall">
-
-            <p class="caption">
-                A simple outing became another beautiful memory.
-                Walking together,
-                shopping together,
-                laughing together...
-                that's what made ordinary days special. ❤️
-            </p>
-
-        </section>
-
-
-        <!-- SCENE 7 -->
-        <section class="scene" id="scene7">
-
-            <div class="scene-number">
-                CHAPTER 07
-            </div>
-
-            <h2>A Special Temple Visit 🛕</h2>
-
-            <img src="temple.png.png"
-                 alt="Kishore and Sathya temple visit">
-
-            <p class="caption">
-                Some moments are peaceful,
-                some are emotional,
-                and some stay quietly in our hearts forever.
-                This was one of those moments. ❤️
-            </p>
-
-        </section>
-
-
-        <!-- SCENE 8 -->
-        <section class="scene" id="scene8">
-
-            <div class="scene-number">
-                CHAPTER 08
-            </div>
-
-            <h2>Movie Time 🎬</h2>
-
-            <img src="movie.png.png"
-                 alt="Kishore and Sathya movie">
-
-            <p class="caption">
-                Just the two of us,
-                sitting together in the theatre,
-                enjoying our little world
-                while the movie played on the screen. 🎬❤️
-            </p>
-
-        </section>
-
-
-        <!-- SCENE 9 -->
-        <section class="scene" id="scene9">
-
-            <div class="scene-number">
-                CHAPTER 09
-            </div>
-
-            <h2>That One Call 📞❤️</h2>
-
-            <img src="calling.png.png"
-                 alt="Kishore and Sathya phone call">
-
-            <p class="caption">
-                Even after a long day,
-                hearing each other's voice
-                could make everything feel better.
-
-                Sometimes love is simply...
-                "Are you home?"
-                "Did you eat?"
-                "Take care."
-                ❤️
-            </p>
-
-        </section>
-
-
-    </main>
-
-
-    <!-- END -->
-    <footer>
-
-        <h2>And Our Story Continues... ❤️</h2>
-
-        <p>
-            These are only a few chapters
-            of our beautiful journey.
-        </p>
-
-        <p>
-            There are still so many memories to create,
-            so many places to go,
-            so many laughs to share...
-        </p>
-
-        <div class="forever">
-            Kishore ❤️ Sathya<br>
-            Forever & Always
         </div>
 
-    </footer>
+    </section>
 
+
+    <section class="scene">
+
+        <img src="agreed.png" alt="We Agreed">
+
+        <div class="caption">
+            <h2>❤️ We Agreed</h2>
+
+            <p>
+                Sometimes, one meeting is enough to begin a beautiful story.
+            </p>
+        </div>
+
+    </section>
+
+
+    <section class="scene">
+
+        <img src="family.png" alt="Family Meeting">
+
+        <div class="caption">
+            <h2>👨‍👩‍👧‍👦 Two Families</h2>
+
+            <p>
+                What started with a meeting slowly became something
+                both our families could call their own.
+            </p>
+        </div>
+
+    </section>
+
+
+    <section class="scene">
+
+        <img src="first-chat.png" alt="First Chat">
+
+        <div class="caption">
+            <h2>💬 Our First Chats</h2>
+
+            <p>
+                From simple conversations...
+                to waiting for the next message.
+            </p>
+        </div>
+
+    </section>
+
+
+    <section class="scene">
+
+        <img src="bike.png" alt="Bike Ride">
+
+        <div class="caption">
+            <h2>🏍️ Little Adventures</h2>
+
+            <p>
+                Every ride became a memory.
+                Every moment became a little more special.
+            </p>
+        </div>
+
+    </section>
+
+
+    <section class="scene">
+
+        <img src="marina.png" alt="Marina Mall">
+
+        <div class="caption">
+            <h2>🌊 Our Marina Memories</h2>
+
+            <p>
+                A little shopping, a little food,
+                and a lot of memories together.
+            </p>
+        </div>
+
+    </section>
+
+
+    <section class="scene">
+
+        <img src="temple.png" alt="Temple">
+
+        <div class="caption">
+            <h2>🌹 A Rose & A Temple</h2>
+
+            <p>
+                A rose, a sweet surprise,
+                and another beautiful memory together.
+            </p>
+        </div>
+
+    </section>
+
+
+    <section class="scene">
+
+        <img src="movie.png" alt="Movie Date">
+
+        <div class="caption">
+            <h2>🎬 Movie Date</h2>
+
+            <p>
+                Sitting together, watching a movie,
+                and enjoying the little moments.
+            </p>
+        </div>
+
+    </section>
+
+
+    <section class="scene">
+
+        <img src="calling.png" alt="Morning Call">
+
+        <div class="caption">
+            <h2>📞 Morning Calls</h2>
+
+            <p>
+                After a long night shift,
+                one phone call was enough to make the morning beautiful.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         T NAGAR
+    ========================= -->
+
+    <section class="scene">
+
+        <img src="tnagar.png.png" alt="Kishore and Sathya in T Nagar">
+
+        <div class="caption">
+
+            <h2>🛵 T. Nagar</h2>
+
+            <p>
+                A scooty ride from the hostel...
+                a little shopping...
+                and Kishore helping Sathya choose her wireless mouse. ❤️
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ENGAGEMENT
+    ========================= -->
+
+    <section class="scene">
+
+        <img src="engagement.png" alt="Kishore and Sathya Engagement">
+
+        <div class="caption">
+
+            <h2>💍 December 14, 2023</h2>
+
+            <p>
+                The day our beautiful journey became a promise of forever.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ENDING
+    ========================= -->
+
+    <div class="ending" id="ending">
+
+        <div class="ending-content">
+
+            <h1>❤️ Happy Birthday ❤️</h1>
+
+            <h2>Kutta Paiyaa 🥰</h2>
+
+            <p>
+                From that little "Hi"
+                to a lifetime together...
+                <br><br>
+
+                I would choose you again and again.
+                <br><br>
+
+                Forever yours,
+                <br>
+                <strong>Panda ❤️</strong>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CONTROLS
+    ========================= -->
+
+    <div class="controls" id="controls">
+
+        <button class="control-btn" onclick="previousScene()">
+            ⏮
+        </button>
+
+        <button class="control-btn" onclick="toggleMusic()" id="musicBtn">
+            🔊
+        </button>
+
+        <button class="control-btn" onclick="nextScene()">
+            ⏭
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       MOVIE SETTINGS
+    ========================= */
+
+    const scenes = document.querySelectorAll(".scene");
+
+    const music = document.getElementById("loveMusic");
+
+    const progressBar = document.getElementById("progressBar");
+
+    const opening = document.getElementById("opening");
+
+    const ending = document.getElementById("ending");
+
+    const controls = document.getElementById("controls");
+
+    const SCENE_TIME = 8000;
+
+    let currentScene = 0;
+
+    let movieStarted = false;
+
+    let timer;
+
+
+    /* =========================
+       START MOVIE
+    ========================= */
+
+    function startMovie() {
+
+        movieStarted = true;
+
+        opening.classList.add("hide");
+
+        controls.style.display = "flex";
+
+        music.volume = 0.45;
+
+        music.play().catch(() => {
+            console.log("Music needs user interaction.");
+        });
+
+        showScene(0);
+
+    }
+
+
+    /* =========================
+       SHOW SCENE
+    ========================= */
+
+    function showScene(index) {
+
+        clearTimeout(timer);
+
+        scenes.forEach(scene => {
+            scene.classList.remove("active");
+        });
+
+        if (index >= scenes.length) {
+
+            showEnding();
+
+            return;
+        }
+
+        if (index < 0) {
+            index = 0;
+        }
+
+        currentScene = index;
+
+        scenes[currentScene].classList.add("active");
+
+        startProgress();
+
+        timer = setTimeout(() => {
+
+            nextScene();
+
+        }, SCENE_TIME);
+
+    }
+
+
+    /* =========================
+       NEXT SCENE
+    ========================= */
+
+    function nextScene() {
+
+        if (!movieStarted) return;
+
+        if (currentScene < scenes.length - 1) {
+
+            showScene(currentScene + 1);
+
+        } else {
+
+            showEnding();
+
+        }
+
+    }
+
+
+    /* =========================
+       PREVIOUS SCENE
+    ========================= */
+
+    function previousScene() {
+
+        if (!movieStarted) return;
+
+        if (ending.classList.contains("show")) {
+
+            ending.classList.remove("show");
+
+            showScene(scenes.length - 1);
+
+            return;
+        }
+
+        if (currentScene > 0) {
+
+            showScene(currentScene - 1);
+
+        }
+
+    }
+
+
+    /* =========================
+       MUSIC
+    ========================= */
+
+    function toggleMusic() {
+
+        const musicBtn = document.getElementById("musicBtn");
+
+        if (music.paused) {
+
+            music.play();
+
+            musicBtn.textContent = "🔊";
+
+        } else {
+
+            music.pause();
+
+            musicBtn.textContent = "🔇";
+
+        }
+
+    }
+
+
+    /* =========================
+       PROGRESS BAR
+    ========================= */
+
+    function startProgress() {
+
+        progressBar.style.transition = "none";
+
+        progressBar.style.width = "0%";
+
+        setTimeout(() => {
+
+            progressBar.style.transition =
+                `width ${SCENE_TIME}ms linear`;
+
+            progressBar.style.width = "100%";
+
+        }, 50);
+
+    }
+
+
+    /* =========================
+       ENDING
+    ========================= */
+
+    function showEnding() {
+
+        clearTimeout(timer);
+
+        progressBar.style.width = "100%";
+
+        ending.classList.add("show");
+
+    }
+
+
+    /* =========================
+       KEYBOARD CONTROLS
+    ========================= */
+
+    document.addEventListener("keydown", function(event) {
+
+        if (!movieStarted) return;
+
+        if (event.key === "ArrowRight") {
+
+            nextScene();
+
+        }
+
+        if (event.key === "ArrowLeft") {
+
+            previousScene();
+
+        }
+
+        if (event.key === " ") {
+
+            toggleMusic();
+
+        }
+
+    });
+
+</script>
 
 </body>
 </html>
+```
