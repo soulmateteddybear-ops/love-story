@@ -269,35 +269,33 @@ button:hover { background: #ffffff35; }
     <button onclick="toggleMusic()" id="musicBtn">♫ Music</button>
   </div>
 
-<audio id="backgroundMusic" loop preload="auto">
-    <source src="./song.mp3.mp3" type="audio/mpeg">
+  <audio id="backgroundMusic" loop preload="auto">
+  <source src="./song.mp3.mp3" type="audio/mpeg">
 </audio>
 
-<button id="musicButton" onclick="toggleMusic()">
-    🎵 Play Our Love Music
+<button id="musicButton" type="button">
+  🎵 Play Our Love Story Music
 </button>
 
 <script>
-const music = document.getElementById("backgroundMusic");
-const button = document.getElementById("musicButton");
+  const music = document.getElementById("backgroundMusic");
+  const musicButton = document.getElementById("musicButton");
 
-function toggleMusic() {
-    if (music.paused) {
-        music.play()
-            .then(() => {
-                button.textContent = "⏸ Pause Our Love Music";
-            })
-            .catch((error) => {
-                alert("Music could not play. Please check the MP3 file name and upload.");
-                console.error(error);
-            });
-    } else {
+  musicButton.addEventListener("click", async function () {
+    try {
+      if (music.paused) {
+        await music.play();
+        musicButton.textContent = "⏸ Pause Music";
+      } else {
         music.pause();
-        button.textContent = "🎵 Play Our Love Music";
+        musicButton.textContent = "🎵 Play Our Love Story Music";
+      }
+    } catch (error) {
+      console.error("Music playback error:", error);
+      alert("Music could not start. Please check the MP3 URL.");
     }
-}
-
-  
+  });
+</script>
 
 </div>
 
