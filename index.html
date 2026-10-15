@@ -269,9 +269,39 @@ button:hover { background: #ffffff35; }
     <button onclick="toggleMusic()" id="musicBtn">♫ Music</button>
   </div>
 
-  <audio id="loveMusic" loop preload="none">
-    <source src="Song.mp3.mp3" type="audio/mpeg">
-  </audio>
+  
+<!-- Kishore ❤️ Sathya Romantic Music -->
+<div class="music-player">
+    <audio id="loveMusic" loop>
+        <source src="./Song.mp3" type="audio/mpeg">
+    </audio>
+
+    <button onclick="playLoveMusic()">
+        🎵 Play Our Love Music ❤️
+    </button>
+
+    <button onclick="pauseLoveMusic()">
+        ⏸ Pause Music
+    </button>
+</div>
+
+<script>
+    const loveMusic = document.getElementById("loveMusic");
+
+    function playLoveMusic() {
+        loveMusic.play()
+            .then(() => console.log("Music playing"))
+            .catch(error => {
+                alert("Music could not play. Please check Song.mp3 in GitHub.");
+                console.error(error);
+            });
+    }
+
+    function pauseLoveMusic() {
+        loveMusic.pause();
+    }
+</script>
+```
 
 </div>
 
