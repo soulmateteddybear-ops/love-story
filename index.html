@@ -268,40 +268,30 @@ button:hover { background: #ffffff35; }
     <button onclick="nextScene()">Next ⏭</button>
     <button onclick="toggleMusic()" id="musicBtn">♫ Music</button>
   </div>
+  {
+  const musicBtn = document.getElementById("musicBtn");
 
-  
-<!-- Kishore ❤️ Sathya Romantic Music -->
-<div class="music-player">
-    <audio id="loveMusic" loop>
-        <source src="./Song.mp3.mp3" type="audio/mpeg">
-    </audio>
+  if (music.paused) {
+    music.volume = 0.45;
 
-    <button onclick="playLoveMusic()">
-        🎵 Play Our Love Music ❤️
-    </button>
-
-    <button onclick="pauseLoveMusic()">
-        ⏸ Pause Music
-    </button>
-</div>
-
-<script>
-    const loveMusic = document.getElementById("loveMusic");
-
-    function playLoveMusic() {
-        loveMusic.play()
-            .then(() => console.log("Music playing"))
-            .catch(error => {
-                alert("Music could not play. Please check Song.mp3.mp3 in GitHub.");
-                console.error(error);
-            });
-    }
-
-    function pauseLoveMusic() {
-        loveMusic.pause();
-    }
-</script>
+    music.play()
+      .then(() => {
+        musicOn = true;
+        musicBtn.textContent = "♫ Music On";
+      })
+      .catch(error => {
+        musicBtn.textContent = "♫ Tap to Play";
+        alert("Please check that Song.mp3 exists in your GitHub repository.");
+        console.error("Music playback error:", error);
+      });
+  } else {
+    music.pause();
+    musicOn = false;
+    musicBtn.textContent = "♫ Music Off";
+  }
+}
 ```
+  
 
 </div>
 
