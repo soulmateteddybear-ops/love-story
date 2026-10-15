@@ -273,7 +273,7 @@ button:hover { background: #ffffff35; }
 <!-- Kishore ❤️ Sathya Romantic Music -->
 <div class="music-player">
     <audio id="loveMusic" loop>
-        <source src="./Song.mp3" type="audio/mpeg">
+        <source src="./Song.mp3.mp3" type="audio/mpeg">
     </audio>
 
     <button onclick="playLoveMusic()">
@@ -292,7 +292,7 @@ button:hover { background: #ffffff35; }
         loveMusic.play()
             .then(() => console.log("Music playing"))
             .catch(error => {
-                alert("Music could not play. Please check Song.mp3 in GitHub.");
+                alert("Music could not play. Please check Song.mp3.mp3 in GitHub.");
                 console.error(error);
             });
     }
