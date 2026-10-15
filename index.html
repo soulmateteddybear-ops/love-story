@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -197,6 +197,7 @@ button:hover { background: #ffffff35; }
   align-items: center;
   padding: 25px;
   text-align: center;
+  overflow-y: auto;
   background: radial-gradient(circle, #6b2549, #170810 80%);
 }
 
@@ -266,36 +267,12 @@ button:hover { background: #ffffff35; }
     <button onclick="previousScene()">⏮ Previous</button>
     <button onclick="togglePause()" id="pauseBtn">Ⅱ Pause</button>
     <button onclick="nextScene()">Next ⏭</button>
-    <button onclick="toggleMusic()" id="musicBtn">♫ Music</button>
+    <button onclick="toggleMusic()" id="musicBtn">♫ Tap to Play Music</button>
   </div>
 
   <audio id="backgroundMusic" loop preload="auto">
-  <source src="./song.mp3.mp3" type="audio/mpeg">
-</audio>
-
-<button id="musicButton" type="button">
-  🎵 Play Our Love Story Music
-</button>
-
-<script>
-  const music = document.getElementById("backgroundMusic");
-  const musicButton = document.getElementById("musicButton");
-
-  musicButton.addEventListener("click", async function () {
-    try {
-      if (music.paused) {
-        await music.play();
-        musicButton.textContent = "⏸ Pause Music";
-      } else {
-        music.pause();
-        musicButton.textContent = "🎵 Play Our Love Story Music";
-      }
-    } catch (error) {
-      console.error("Music playback error:", error);
-      alert("Music could not start. Please check the MP3 URL.");
-    }
-  });
-</script>
+    <source src="./song.mp3.mp3" type="audio/mpeg">
+  </audio>
 
 </div>
 
@@ -369,9 +346,6 @@ const story = [
     text: "A beautiful promise that brought us one step closer to forever.",
     date: "14 DECEMBER 2023"
   },
-
-  /* Continue with your existing later-scene filenames */
-
   {
     image: "Wedding shopping.png",
     chapter: "12 · Wedding Preparations",
@@ -387,7 +361,7 @@ const story = [
   },
   {
     image: "Relationship.png",
-    chapter: "14 · Two and a Half Years",
+    chapter: "14 · Our Journey Together",
     title: "The Real Meaning of Love 💞",
     text: "Happy times, fights, misunderstandings, arguments, sorry, anger, laughter, friendship and choosing each other again."
   },
@@ -414,15 +388,18 @@ const story = [
 
 const container = document.getElementById("scenes");
 const progressBar = document.getElementById("progressBar");
-const music = document.getElementById("loveMusic");
+const music = document.getElementById("backgroundMusic");
 const opening = document.getElementById("opening");
 const ending = document.getElementById("ending");
+const musicBtn = document.getElementById("musicBtn");
+const pauseBtn = document.getElementById("pauseBtn");
 
 let current = 0;
 let started = false;
 let paused = false;
-let musicOn = true;
+let musicOn = false;
 let timer = null;
+
 const SCENE_TIME = 8000;
 
 story.forEach((item, index) => {
@@ -436,7 +413,7 @@ story.forEach((item, index) => {
 
   img.onerror = function() {
     console.warn("Image filename not found:", item.image);
-    this.style.visibility = "hidden";
+    this.alt = "Image not found: " + item.image;
   };
 
   const caption = document.createElement("div");
@@ -487,19 +464,24 @@ function showScene(index) {
   }
 }
 
-function startMovie() {
+async function startMovie() {
   started = true;
   paused = false;
   opening.classList.add("hide");
+  pauseBtn.textContent = "Ⅱ Pause";
 
-  if (musicOn) {
+  // Attempt music playback after the user's click.
+  try {
     music.volume = 0.45;
-    music.play().catch(() => {
-      document.getElementById("musicBtn").textContent = "♫ Tap Music";
-    });
+    await music.play();
+    musicOn = true;
+    musicBtn.textContent = "♫ Music On";
+  } catch (error) {
+    musicOn = false;
+    musicBtn.textContent = "♫ Tap to Play Music";
+    console.warn("Autoplay was blocked. Use the Music button.", error);
   }
 
-  document.getElementById("pauseBtn").textContent = "Ⅱ Pause";
   showScene(0);
 }
 
@@ -529,8 +511,7 @@ function togglePause() {
   if (!started) return;
 
   paused = !paused;
-  document.getElementById("pauseBtn").textContent =
-    paused ? "▶ Play" : "Ⅱ Pause";
+  pauseBtn.textContent = paused ? "▶ Play" : "Ⅱ Pause";
 
   if (paused) {
     clearTimeout(timer);
@@ -540,15 +521,23 @@ function togglePause() {
   }
 }
 
-function toggleMusic() {
-  musicOn = !musicOn;
-
-  if (musicOn) {
-    music.play().catch(() => {});
-    document.getElementById("musicBtn").textContent = "♫ Music On";
+async function toggleMusic() {
+  if (music.paused) {
+    try {
+      music.volume = 0.45;
+      await music.play();
+      musicOn = true;
+      musicBtn.textContent = "♫ Music On";
+    } catch (error) {
+      musicOn = false;
+      musicBtn.textContent = "♫ Tap to Retry";
+      console.error("Music could not play:", error);
+      alert("Please check that song.mp3.mp3 exists in your GitHub repository and opens correctly.");
+    }
   } else {
     music.pause();
-    document.getElementById("musicBtn").textContent = "♫ Music Off";
+    musicOn = false;
+    musicBtn.textContent = "♫ Music Off";
   }
 }
 
@@ -560,13 +549,15 @@ function restartMovie() {
 
   music.pause();
   music.currentTime = 0;
+  musicOn = false;
+  musicBtn.textContent = "♫ Tap to Play Music";
 
   ending.classList.remove("show");
   opening.classList.remove("hide");
   scenes.forEach(scene => scene.classList.remove("active"));
 
   progressBar.style.width = "0%";
-  document.getElementById("pauseBtn").textContent = "Ⅱ Pause";
+  pauseBtn.textContent = "Ⅱ Pause";
 }
 
 document.addEventListener("keydown", event => {
@@ -583,3 +574,4 @@ document.addEventListener("keydown", event => {
 </script>
 </body>
 </html>
+```
